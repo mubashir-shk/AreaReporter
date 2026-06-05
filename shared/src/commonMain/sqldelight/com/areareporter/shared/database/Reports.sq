@@ -1,0 +1,57 @@
+CREATE TABLE IF NOT EXISTS reports (
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    category TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    imagePath TEXT,
+    status TEXT NOT NULL DEFAULT 'PENDING',
+    createdAt INTEGER NOT NULL,
+    retryCount INTEGER NOT NULL DEFAULT 0,
+    lastSyncAttempt INTEGER
+);
+
+-- Query: get all reports ordered by newest first
+selectAllReports:
+SELECT * FROM reports ORDER BY createdAt DESC;
+
+-- Query: get a single report by ID
+selectReportById:
+SELECT * FROM reports WHERE id = ?;
+
+-- Query: get all reports with a specific sync status
+selectReportsByStatus:
+SELECT * FROM reports WHERE status = ? ORDER BY createdAt DESC;
+
+-- Query: get all pending or failed reports (for sync queue)
+selectPendingReports:
+SELECT * FROM reports WHERE status = 'PENDING' OR status = 'FAILED' ORDER BY createdAt ASC;
+
+-- Query: insert a new report
+insertReport:
+INSERT OR REPLACE INTO reports (
+    id, title, description, category,
+    latitude, longitude, imagePath,
+    status, createdAt, retryCount, lastSyncAttempt
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+-- Query: update sync status
+updateReportStatus:
+UPDATE reports SET status = ? WHERE id = ?;
+
+-- Query: update sync status with retry info
+updateReportSyncInfo:
+UPDATE reports
+SET status = ?,
+    retryCount = ?,
+    lastSyncAttempt = ?
+WHERE id = ?;
+
+-- Query: delete a report
+deleteReport:
+DELETE FROM reports WHERE id = ?;
+
+-- Query: count pending reports
+countPendingReports:
+SELECT COUNT(*) FROM reports WHERE status = 'PENDING' OR status = 'FAILED';

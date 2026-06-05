@@ -1,0 +1,93 @@
+[versions]
+agp = "8.2.2"
+kotlin = "1.9.22"
+compose = "1.5.12"
+compose-plugin = "1.5.12"
+coroutines = "1.7.3"
+ktor = "2.3.7"
+sqldelight = "2.0.1"
+
+# Koin 3.5.6 — all artifacts (koin-core, koin-android, koin-androidx-compose)
+# confirmed on Maven Central. koin-compose KMP artifact does NOT exist in 3.x.
+# Solution: use koin-core in commonMain, koin-android + koin-androidx-compose in androidMain.
+# Drop voyager-koin (it requires koin-compose which only exists in Koin 4.x).
+# Use rememberScreenModel + manual Koin get() instead.
+koin = "3.5.6"
+koin-android = "3.5.6"
+
+coil = "2.5.0"
+kamel = "0.9.1"
+voyager = "1.0.0"
+kotlinx-serialization = "1.6.2"
+kotlinx-datetime = "0.5.0"
+workmanager = "2.9.0"
+activity-compose = "1.8.2"
+core-ktx = "1.12.0"
+lifecycle = "2.7.0"
+accompanist = "0.32.0"
+uuid = "0.8.2"
+
+[libraries]
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+# Coroutines
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+
+# Serialization
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+# DateTime
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+# Ktor
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+# SQLDelight
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+
+# Koin — commonMain only needs koin-core (no koin-compose needed without voyager-koin)
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-android" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-android" }
+
+# Voyager — WITHOUT voyager-koin (it requires koin-compose which doesn't exist in koin 3.x)
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+
+# Image loading
+kamel-image = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+# WorkManager
+workmanager-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workmanager" }
+
+# Android
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+
+# Accompanist
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+
+# UUID
+uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

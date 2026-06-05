@@ -1,0 +1,78 @@
+{
+  "description": "Sample JSON payloads for Area Reporter API",
+  "upload_request": {
+    "description": "POST /api/reports — Upload a new report to the server",
+    "example": {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "Large pothole near school",
+      "description": "There is a deep pothole approximately 30cm wide causing danger to cyclists and motorcyclists near the main school gate.",
+      "category": "POTHOLE",
+      "latitude": 19.0760,
+      "longitude": 72.8777,
+      "imagePath": "/uploads/report_image_123.jpg",
+      "createdAt": 1706025600000
+    }
+  },
+  "upload_response_success": {
+    "description": "Successful upload response",
+    "example": {
+      "success": true,
+      "serverId": "server_550e8400-e29b-41d4-a716-446655440000_1706025600000",
+      "message": "Report uploaded successfully"
+    }
+  },
+  "upload_response_failure": {
+    "description": "Failed upload response (triggers retry with exponential backoff)",
+    "example": {
+      "success": false,
+      "serverId": null,
+      "message": "Connection timeout"
+    }
+  },
+  "sample_reports": [
+    {
+      "id": "rep-001",
+      "title": "Garbage overflowing near park",
+      "description": "The municipality bins near Central Park have been overflowing for 3 days. Waste is spilling onto the footpath.",
+      "category": "GARBAGE",
+      "latitude": 19.0821,
+      "longitude": 72.8416,
+      "imagePath": null,
+      "status": "SYNCED",
+      "createdAt": 1706025600000,
+      "retryCount": 0
+    },
+    {
+      "id": "rep-002",
+      "title": "Water pipe burst on MG Road",
+      "description": "A water pipe has burst creating a large pool on MG Road. Water is wasting and road is flooded.",
+      "category": "WATER_LEAKAGE",
+      "latitude": 19.0550,
+      "longitude": 72.8350,
+      "imagePath": "/uploads/water_pipe_photo.jpg",
+      "status": "PENDING",
+      "createdAt": 1706112000000,
+      "retryCount": 0
+    },
+    {
+      "id": "rep-003",
+      "title": "3 street lights out on Highway",
+      "description": "Three consecutive street lights are non-functional making the highway very dark and dangerous at night.",
+      "category": "BROKEN_STREET_LIGHT",
+      "latitude": 19.1136,
+      "longitude": 72.9081,
+      "imagePath": null,
+      "status": "FAILED",
+      "createdAt": 1706198400000,
+      "retryCount": 5
+    }
+  ],
+  "categories": [
+    {"name": "POTHOLE", "displayName": "Pothole", "emoji": "🕳️"},
+    {"name": "GARBAGE", "displayName": "Garbage", "emoji": "🗑️"},
+    {"name": "WATER_LEAKAGE", "displayName": "Water Leakage", "emoji": "💧"},
+    {"name": "BROKEN_STREET_LIGHT", "displayName": "Broken Street Light", "emoji": "💡"},
+    {"name": "TRAFFIC_SIGNAL", "displayName": "Traffic Signal", "emoji": "🚦"},
+    {"name": "DRAINAGE", "displayName": "Drainage", "emoji": "🌊"}
+  ]
+}

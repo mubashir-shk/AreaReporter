@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-cache-path
+        name="area_reporter_images"
+        path="images/" />
+    <external-files-path
+        name="area_reporter_files"
+        path="images/" />
+    <cache-path
+        name="area_reporter_cache"
+        path="images/" />
+</paths>

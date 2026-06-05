@@ -1,0 +1,11 @@
+package com.areareporter.shared.database
+
+import app.cash.sqldelight.db.SqlDriver
+
+/**
+ * Platform-specific database driver factory.
+ * Each platform (Android, iOS) provides its own implementation.
+ */
+expect class DatabaseDriverFactory {
+    fun createDriver(): SqlDriver
+}
